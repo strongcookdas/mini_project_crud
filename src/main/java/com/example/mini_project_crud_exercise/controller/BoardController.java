@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -38,6 +39,13 @@ public class BoardController {
             model.addAttribute("article", optArticle.get());
             return "show";
         }
+    }
+
+    @GetMapping("")
+    public String listArticle(Model model){
+        List<Article> list = articleRepository.findAll();
+        model.addAttribute("articles",list);
+        return "list";
     }
 
     @PostMapping("/post")
