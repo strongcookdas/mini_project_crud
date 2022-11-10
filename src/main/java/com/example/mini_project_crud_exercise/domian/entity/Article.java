@@ -2,6 +2,7 @@ package com.example.mini_project_crud_exercise.domian.entity;
 
 import com.example.mini_project_crud_exercise.repository.ArticleRepository;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "board")
 @NoArgsConstructor
+@Getter
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
