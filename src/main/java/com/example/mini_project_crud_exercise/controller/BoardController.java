@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,6 +57,18 @@ public class BoardController {
         else {
             model.addAttribute("article", optArticle.get());
             return "edit";
+        }
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteArticle(@PathVariable Long id, RedirectAttributes rtts) {
+        Optional<Article> optArticle = articleRepository.findById(id);
+        if (optArticle.isEmpty())
+            return "error";
+        else {
+            articleRepository.deleteById(optArticle.get().getId());
+            rtts.addAttribute("msg",optArticle.get().getId()+"번째 게시글이 삭제되었습니다.");
+            return "redirect:/board";
         }
     }
 
