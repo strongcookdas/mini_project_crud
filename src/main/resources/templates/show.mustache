@@ -1,4 +1,5 @@
 {{>layouts/header}}
+<div class="container">
 <table class="table">
     <thead>
     <tr>
@@ -17,4 +18,8 @@
     {{/article}}
     </tbody>
 </table>
+    <a href = "/board/{{id}}/edit" class="btn btn-success">edit</a>
+    <a href = "/board">back</a>
+</div>
+
 {{>layouts/footer}}

@@ -48,8 +48,27 @@ public class BoardController {
         return "list";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editArticleForm(@PathVariable Long id, Model model){
+        Optional<Article> optArticle = articleRepository.findById(id);
+        if (optArticle.isEmpty())
+            return "error";
+        else {
+            model.addAttribute("article", optArticle.get());
+            return "edit";
+        }
+    }
+
     @PostMapping("/post")
     public String saveArticle(ArticleDto articleDto) {
+        log.info(articleDto.toString());
+        Article article = articleDto.toEntity();
+        articleRepository.save(article);
+        return "redirect:/board/" + article.getId();
+    }
+
+    @PostMapping("/{id}/upadate")
+    public String updateArticle(ArticleDto articleDto) {
         log.info(articleDto.toString());
         Article article = articleDto.toEntity();
         articleRepository.save(article);
