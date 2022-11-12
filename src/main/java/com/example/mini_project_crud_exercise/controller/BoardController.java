@@ -7,6 +7,8 @@ import com.example.mini_project_crud_exercise.domian.entity.Comment;
 import com.example.mini_project_crud_exercise.repository.ArticleRepository;
 import com.example.mini_project_crud_exercise.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,9 +52,11 @@ public class BoardController {
     }
 
     @GetMapping("")
-    public String listArticle(Model model){
-        List<Article> list = articleRepository.findAll();
+    public String listArticle(Model model, Pageable pageable){
+        Page<Article> list = articleRepository.findAll(pageable);
         model.addAttribute("articles",list);
+        model.addAttribute("previous",pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next",pageable.next().getPageNumber());
         return "articles/list";
     }
 
