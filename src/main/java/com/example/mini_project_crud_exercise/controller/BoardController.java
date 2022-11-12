@@ -67,7 +67,7 @@ public class BoardController {
             return "error";
         else {
             articleRepository.deleteById(optArticle.get().getId());
-            rtts.addAttribute("msg",optArticle.get().getId()+"번째 게시글이 삭제되었습니다.");
+            rtts.addFlashAttribute("msg",optArticle.get().getId()+"번째 게시글이 삭제되었습니다.");
             return "redirect:/board";
         }
     }
