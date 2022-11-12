@@ -1,0 +1,60 @@
+{{>layouts/header}}
+<div class="container">
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    {{#article}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{title}}</td>
+        <td>{{content}}</td>
+    </tr>
+    {{/article}}
+    </tbody>
+</table>
+    <a href = "/board/{{id}}/edit" class="btn btn-success">Edit</a>
+    <a href = "/board/{{id}}/delete" class="btn btn-danger">Delete</a>
+    <a href = "/board">back</a>
+</div>
+<hr>
+<!-- comment -->
+<div class="container">
+    <h2>Comment</h2>
+    <form class="container" action = "/board/comment/post" method="post">
+        <input type="hidden" name="articleId" value={{id}}>
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" name="name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Comment</label>
+            <input class="form-control" name="comment">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/board" >back</a>
+    </form>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Comment</th>
+        </tr>
+        </thead>
+        <tbody class="table">
+        {{#comments}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{comment}}</td>
+            </tr>
+        {{/comments}}
+        </tbody>
+    </table>
+</div>
+{{>layouts/footer}}
